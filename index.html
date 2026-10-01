@@ -77,10 +77,10 @@ input[type="text"]{width:100%;padding:14px 16px;border:2px solid #dfe3ed;border-
 .board-title{position:relative;z-index:2;text-align:center;background:rgba(255,255,255,.74);backdrop-filter:blur(5px);border:3px solid rgba(255,255,255,.82);border-radius:24px;padding:17px 16px 15px;margin:4px auto 24px;max-width:760px;box-shadow:0 7px 18px rgba(35,45,70,.09)}
 .child-name{display:block;font-size:clamp(2.2rem,7vw,4.7rem);font-weight:1000;letter-spacing:.02em;line-height:.95}
 .token-label{display:block;margin-top:7px;font-size:clamp(1rem,3vw,1.65rem);font-weight:1000;letter-spacing:.22em;color:var(--accent)}
-.stars{position:relative;z-index:3;display:grid;grid-template-columns:repeat(var(--cols),minmax(62px,1fr));gap:16px;max-width:800px;margin:90px auto 0;align-items:center;justify-content:center}
+.stars{position:relative;z-index:3;display:grid;grid-template-columns:repeat(5,minmax(0,118px));justify-content:center;gap:18px;max-width:760px;margin:82px auto 0;align-items:center;padding:0 10px}
 .star{
-  width:100%;aspect-ratio:1;border:0;background:rgba(255,255,255,.72);border-radius:28%;min-width:0;
-  display:grid;place-items:center;font-size:clamp(3.4rem,10vw,6rem);
+  width:100%;aspect-ratio:1;border:0;background:rgba(255,255,255,.72);border-radius:28%;
+  display:flex;align-items:center;justify-content:center;padding:0;line-height:1;font-size:clamp(3rem,8vw,5.2rem);
   box-shadow:inset 0 0 0 4px rgba(255,255,255,.75),0 10px 18px rgba(38,48,76,.14);
   filter:grayscale(1) opacity(.38);transition:.17s transform,.17s filter,.17s background;
 }
@@ -103,8 +103,8 @@ input[type="text"]{width:100%;padding:14px 16px;border:2px solid #dfe3ed;border-
   .theme-card{min-height:165px}
   .form-grid{grid-template-columns:1fr}
   .board-shell{min-height:610px;padding:22px 12px}
-  .stars{gap:9px;margin-top:92px;grid-template-columns:repeat(var(--cols),minmax(46px,1fr))}
-  .stars.count-10{grid-template-columns:repeat(5,minmax(42px,1fr))}
+  .stars{gap:10px;margin-top:82px;grid-template-columns:repeat(5,minmax(0,1fr));max-width:100%;padding:0 4px}
+  .stars.count-10{grid-template-columns:repeat(5,minmax(0,1fr))}
   .star{font-size:clamp(2.6rem,13vw,4.3rem);border-radius:22%}
   .controls .btn{flex:1 1 42%}
 }
@@ -114,78 +114,6 @@ input[type="text"]{width:100%;padding:14px 16px;border:2px solid #dfe3ed;border-
   .theme-card .name{left:12px;bottom:40px}
   .theme-card .desc{left:12px;right:12px;bottom:10px;font-size:.72rem}
   .theme-card .mini-icons span{font-size:2.15rem}
-}
-@media print{
-  @page{size:letter portrait;margin:.2in}
-  html,body{
-    margin:0!important;
-    padding:0!important;
-    width:8.1in!important;
-    height:10.6in!important;
-    overflow:hidden!important;
-    background:#fff!important;
-  }
-  .topbar,.controls,.note,.panel>h2,.panel>.sub,.theme-chip,
-  #startScreen,#themeScreen,#setupScreen{
-    display:none!important;
-  }
-  .app{
-    width:8.1in!important;
-    height:10.6in!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:0!important;
-    overflow:hidden!important;
-  }
-  #boardScreen{
-    display:block!important;
-    width:8.1in!important;
-    height:10.6in!important;
-    margin:0!important;
-    padding:0!important;
-    overflow:hidden!important;
-    page-break-after:avoid!important;
-    break-after:avoid-page!important;
-  }
-  #boardScreen .panel{
-    width:8.1in!important;
-    height:10.6in!important;
-    margin:0!important;
-    padding:0!important;
-    border:0!important;
-    box-shadow:none!important;
-    background:#fff!important;
-    overflow:hidden!important;
-  }
-  .board-shell{
-    width:8.1in!important;
-    height:10.6in!important;
-    min-height:0!important;
-    max-height:10.6in!important;
-    margin:0!important;
-    padding:.28in .2in!important;
-    border-width:5px!important;
-    border-radius:22px!important;
-    box-shadow:none!important;
-    overflow:hidden!important;
-    -webkit-print-color-adjust:exact!important;
-    print-color-adjust:exact!important;
-    page-break-inside:avoid!important;
-    break-inside:avoid-page!important;
-  }
-  .board-title{
-    margin:.03in auto .12in!important;
-    padding:.12in .12in .1in!important;
-  }
-  .stars{
-    margin:.55in auto 0!important;
-    gap:.12in!important;
-  }
-  .star{
-    -webkit-print-color-adjust:exact!important;
-    print-color-adjust:exact!important;
-  }
-  .celebrate{display:none!important}
 }
 </style>
 </head>
@@ -199,11 +127,9 @@ input[type="text"]{width:100%;padding:14px 16px;border:2px solid #dfe3ed;border-
   <section id="startScreen" class="screen active">
     <div class="panel">
       <h1>Create a <span class="gradient-word">Fun Token Board</span></h1>
-      <p class="sub">Choose from 24 themes, add a child’s name, pick 5 or 10 stars, and use the board interactively or print it.</p>
+      <p class="sub">Choose from 24 themes, add a child’s name, pick 5 or 10 stars, and use the board interactively.</p>
       <div class="actions">
         <button class="btn primary" onclick="newBoard()">Create New Token Board</button>
-        <label class="btn green" for="importStart" role="button">Import Saved Board</label>
-        <input id="importStart" class="hidden" type="file" accept="application/json,.json" onchange="importBoard(event)">
       </div>
     </div>
   </section>
@@ -211,7 +137,7 @@ input[type="text"]{width:100%;padding:14px 16px;border:2px solid #dfe3ed;border-
   <section id="themeScreen" class="screen">
     <div class="panel">
       <h2>Choose a Theme</h2>
-      <p class="sub">Every theme uses larger, more playful artwork that flows through the center of the board behind the stars.</p>
+      <p class="sub">Tap a theme to select it and continue automatically.</p>
       <div class="theme-toolbar">
         <input id="themeSearch" type="text" placeholder="Search themes…" oninput="filterThemes()">
         <button class="btn outline" onclick="clearThemeSearch()">Show All</button>
@@ -220,7 +146,6 @@ input[type="text"]{width:100%;padding:14px 16px;border:2px solid #dfe3ed;border-
       <div id="emptyNote" class="empty-note">No themes match that search.</div>
       <div class="actions">
         <button class="btn" onclick="go('startScreen')">Back</button>
-        <button class="btn primary" onclick="go('setupScreen')">Continue</button>
       </div>
     </div>
   </section>
@@ -267,10 +192,6 @@ input[type="text"]{width:100%;padding:14px 16px;border:2px solid #dfe3ed;border-
         <button class="btn primary" onclick="changeTheme()">Change Theme</button>
         <button class="btn" onclick="resetTokens()">Reset Tokens</button>
         <button class="btn red" onclick="clearBoard()">Start Over</button>
-        <button class="btn green" onclick="printBoard()">Print Board</button>
-        <button class="btn" onclick="exportBoard()">Export</button>
-        <label class="btn" for="importBoardInput" role="button">Import Board</label>
-        <input id="importBoardInput" class="hidden" type="file" accept="application/json,.json" onchange="importBoard(event)">
       </div>
       <div class="note">Every new board starts with 0 earned stars. Tap any star to add it; tap the same star again to remove it. Personalize edits the name or star count. Change Theme keeps the current name and earned stars.</div>
     </div>
@@ -354,6 +275,12 @@ function selectTheme(id){
     const q=document.getElementById('themeSearch').value.trim().toLowerCase();
     return !q || (t.name+' '+t.desc).toLowerCase().includes(q);
   }));
+  if(state.name){
+    renderBoard();
+    go('boardScreen');
+  }else{
+    go('setupScreen');
+  }
 }
 function chooseCount(el){
   document.querySelectorAll('.star-choice').forEach(x=>x.classList.remove('active'));
@@ -386,21 +313,9 @@ function personalizeBoard(){
   document.querySelectorAll('.star-choice').forEach(x=>x.classList.toggle('active',Number(x.dataset.count)===state.count));
   go('setupScreen');
 }
-function printBoard(){
-  renderBoard();
-  document.body.classList.add('printing');
-  requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>{
-      try{ window.print(); }
-      finally{ setTimeout(()=>document.body.classList.remove('printing'),800); }
-    });
-  });
-}
 function changeTheme(){
-  renderThemeGrid();go('themeScreen');
-  const continueBtn=[...document.querySelectorAll('#themeScreen .actions .btn.primary')][0];
-  continueBtn.textContent='Apply Theme';
-  continueBtn.onclick=()=>{save();renderBoard();go('boardScreen');continueBtn.textContent='Continue';continueBtn.onclick=()=>go('setupScreen')};
+  renderThemeGrid();
+  go('themeScreen');
 }
 function decorateBoard(theme){
   const box=document.getElementById('boardDecor');
@@ -420,12 +335,12 @@ function renderBoard(){
   board.style.setProperty('--c1',theme.c1);board.style.setProperty('--c2',theme.c2);
   board.style.setProperty('--c3',theme.c3);board.style.setProperty('--accent',theme.accent);
   board.style.setProperty('--boardText',theme.text);
+  board.style.background=`radial-gradient(circle at 18% 14%,rgba(255,255,255,.86) 0 12%,transparent 13%), radial-gradient(circle at 82% 78%,rgba(255,255,255,.44) 0 16%,transparent 17%), linear-gradient(145deg,${theme.c1},${theme.c2} 54%,${theme.c3})`;
   decorateBoard(theme);
   document.getElementById('boardName').textContent=(state.name||'CHILD').toUpperCase()+'’S';
   const chip=document.getElementById('themeChip');chip.innerHTML=`<span>${theme.icons[0]}</span><span>${theme.name}</span>`;
   const stars=document.getElementById('stars');
   stars.innerHTML='';stars.className='stars count-'+state.count;
-  stars.style.setProperty('--cols',5);
   for(let i=0;i<state.count;i++){
     const b=document.createElement('button');
     b.className='star'+(state.earnedStars.includes(i)?' earned':'');
@@ -457,64 +372,6 @@ function save(){
   localStorage.setItem('oasis_earned_stars',JSON.stringify(state.earnedStars));
   localStorage.removeItem('oasis_earned');
 }
-async function exportBoard(){
-  try{
-    const filename=(state.name||'token-board').replace(/\s+/g,'-').toLowerCase()+'-token-board.json';
-    const data=JSON.stringify({
-      theme:state.theme,
-      name:state.name,
-      count:state.count,
-      earnedStars:state.earnedStars
-    },null,2);
-    const file=new File([data],filename,{type:'application/json'});
-    if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-      await navigator.share({files:[file],title:'Oasis Token Board'});
-      return;
-    }
-    const blob=new Blob([data],{type:'application/json'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;a.download=filename;a.style.display='none';
-    document.body.appendChild(a);a.click();a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),1500);
-  }catch(err){
-    if(err && err.name!=='AbortError') alert('The board could not be exported on this browser.');
-  }
-}
-function importBoard(e){
-  const input=e.target;
-  const file=input.files && input.files[0];
-  if(!file){ input.value=''; return; }
-  const reader=new FileReader();
-  reader.onload=()=>{
-    try{
-      const data=JSON.parse(String(reader.result||''));
-      if(!themes.some(t=>t.id===data.theme))throw new Error('Unknown theme');
-      if(!validCounts.includes(Number(data.count)))throw new Error('Invalid star count');
-      const importedName=String(data.name||'').trim().slice(0,24);
-      if(!importedName) throw new Error('Missing name');
-      state.theme=data.theme;
-      state.name=importedName;
-      state.count=Number(data.count);
-      if(Array.isArray(data.earnedStars)){
-        state.earnedStars=[...new Set(data.earnedStars.map(Number).filter(i=>Number.isInteger(i)&&i>=0&&i<state.count))].sort((a,b)=>a-b);
-      }else{
-        const oldEarned=Math.max(0,Math.min(Number(data.earned||0),state.count));
-        state.earnedStars=Array.from({length:oldEarned},(_,i)=>i);
-      }
-      save();
-      document.getElementById('childName').value=state.name;
-      document.querySelectorAll('.star-choice').forEach(x=>x.classList.toggle('active',Number(x.dataset.count)===state.count));
-      renderThemeGrid();renderBoard();go('boardScreen');
-    }catch(err){
-      alert('That file could not be imported. Please choose a board exported from this Token Board Builder.');
-    }finally{
-      input.value='';
-    }
-  };
-  reader.onerror=()=>{ alert('That file could not be read.'); input.value=''; };
-  reader.readAsText(file);
-}
 function celebrate(){
   const theme=getTheme(state.theme),box=document.getElementById('celebrate');
   box.innerHTML='';box.classList.add('show');
@@ -532,11 +389,8 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(!validCounts.includes(state.count))state.count=5;
   if(!themes.some(t=>t.id===state.theme))state.theme='halloween';
   state.earnedStars=[...new Set(state.earnedStars.filter(i=>Number.isInteger(i)&&i>=0&&i<state.count))].sort((a,b)=>a-b);
-  document.getElementById('childName').value='';
-  state.name='';
-  state.count=5;
-  state.earnedStars=[];
-  document.querySelectorAll('.star-choice').forEach(x=>x.classList.toggle('active',Number(x.dataset.count)===5));
+  document.getElementById('childName').value=state.name || '';
+  document.querySelectorAll('.star-choice').forEach(x=>x.classList.toggle('active',Number(x.dataset.count)===state.count));
   go('startScreen');
 });
 </script>
